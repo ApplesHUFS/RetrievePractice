@@ -2,6 +2,44 @@
 
 이 프로젝트는 Retrieval-Augmented Generation(RAG)의 검색(Retrieval) 단계를 3가지 방법으로 구현하고 비교합니다.
 
+## 프로젝트 설명
+
+RAG(Retrieval-Augmented Generation)는 대규모 언어 모델의 생성 능력과 외부 데이터 검색 기능을 결합한 기술입니다. 이 프로젝트에서는 RAG의 검색(Retrieval) 단계를 다양한 방법으로 구현하고 그 성능을 비교합니다.
+
+## 시작하기
+
+### 저장소 클론
+
+다음 명령어를 사용하여 저장소를 클론합니다:
+
+```bash
+git clone https://github.com/ApplesHUFS/RetrievePractice.git
+cd RetrievePractice
+```
+
+### 환경 설정
+
+1. Python 3.8 이상이 설치되어 있는지 확인합니다.
+
+2. 가상 환경을 생성합니다 (선택 사항이지만 권장):
+
+   ```bash
+   # venv 사용
+   python -m venv venv
+   
+   # Windows에서 활성화
+   venv\Scripts\activate
+   
+   # macOS/Linux에서 활성화
+   source venv/bin/activate
+   ```
+
+3. 필요한 패키지를 설치합니다:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ## 구현된 검색 방법
 
 1. **BM25** - 전통적인 키워드 기반 검색 알고리즘
@@ -14,25 +52,20 @@
 - `retriever.py`: 검색 모듈 (BM25, DPR, Sentence Transformer)
 - `main.py`: 메인 실행 모듈
 - `requirements.txt`: 필요한 패키지 목록
+- `data/`: 문서 데이터와 전처리된 데이터 저장 디렉토리
 
 ## 실행 방법
 
-### 1. 필요 패키지 설치
+### 1. 데이터 전처리
 
 ```bash
-pip install -r requirements.txt
+python preprocess.py --input data/documents.json --output data/preprocessed_documents.json
 ```
 
-### 2. 데이터 전처리
+### 2. 검색 실행
 
 ```bash
-python preprocess.py --input documents.json --output preprocessed_documents.json
-```
-
-### 3. 검색 실행
-
-```bash
-python main.py --data preprocessed_documents.json
+python main.py --data data/preprocessed_documents.json
 ```
 
 ## 전처리 과정
@@ -81,3 +114,27 @@ python main.py --data preprocessed_documents.json
 2. 검색 방법 선택 (BM25, DPR, Sentence Transformer, 전체 비교)
 3. 선택한 방법으로 검색 수행
 4. 결과 출력 및 비교
+
+## 사용 예시
+
+다음은 시스템 실행 후 사용할 수 있는 명령의 예시입니다:
+
+```
+===================================================================
+RAG 검색 시스템
+===================================================================
+
+검색어를 입력하세요 (종료: q): 트랜스포머
+
+검색 방법을 선택하세요:
+1. BM25 (키워드 기반)
+2. DPR (Dense Passage Retrieval)
+3. Sentence Transformer
+4. 모든 방법으로 검색
+
+선택 (1-4): 4
+```
+
+## 라이센스
+
+이 프로젝트는 MIT 라이센스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
